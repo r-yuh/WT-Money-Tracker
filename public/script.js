@@ -1,3 +1,25 @@
+window.addEventListener("load", function () {
+    const loader = document.getElementById("loaderWrapper");
+    loader.style.display = "none";
+  });
+  function scrollToElement(elementSelector, instance = 0) {
+    // Select all elements that match the given selector
+    const elements = document.querySelectorAll(elementSelector);
+    // Check if there are elements matching the selector and if the requested instance exists
+    if (elements.length > instance) {
+        // Scroll to the specified instance of the element
+        elements[instance].scrollIntoView({ behavior: 'smooth' });
+    }
+}
+const button1 = document.getElementById("button1");
+const link = document.getElementById("link");
+button1.addEventListener('click', () => {
+    scrollToElement('.form');
+});
+link.addEventListener('click', () => {
+    scrollToElement('.about');
+});
+
 let expenses =[]
 let totalAmount = 0;
 const categorySelect = document.getElementById('category_select')
@@ -109,4 +131,11 @@ for(const expense of expenses){
      InfoCell.textContent=expense.info;
      dateCell.textContent=expense.date;
      deleteCell.appendChild(deleteBtn);
+}
+
+function downloadPDF() {
+    const taskList = document.getElementById('list');
+    html2pdf()
+        .from(list)
+        .save();
 }
